@@ -1,4 +1,4 @@
-package com.chatapp.security;
+package com.chatapp.helper;
 
 import io.jsonwebtoken.security.Keys;
 import lombok.AllArgsConstructor;

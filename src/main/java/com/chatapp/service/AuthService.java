@@ -2,6 +2,7 @@ package com.chatapp.service;
 
 import com.chatapp.dto.LoginRequest;
 import com.chatapp.dto.LoginResponse;
+import com.chatapp.helper.LoginResponseHelper;
 import com.chatapp.model.User;
 import com.chatapp.repository.UserRepository;
 import com.chatapp.security.JwtUtil;
@@ -26,6 +27,7 @@ public class AuthService {
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final UserRepository userRepository;
+    private LoginResponseHelper responseHelper;
 
     public LoginResponse register(LoginRequest request){
 
@@ -39,11 +41,7 @@ public class AuthService {
                 .build();
         userRepository.save(user);
         String token = jwtUtil.generateToken(user.getUserName());
-        return LoginResponse.builder()
-                .userName(user.getUserName())
-                .token(token)
-                .message("Registration successful")
-                .build();
+        return responseHelper.getLoginResponse(user.getUserName(),token,"Registration successful");
     }
 
     public LoginResponse login(LoginRequest request){
@@ -54,11 +52,7 @@ public class AuthService {
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
             String token = jwtUtil.generateToken(userDetails.getUsername());
-            return LoginResponse.builder()
-                    .userName(userDetails.getUsername())
-                    .token(token)
-                    .message("Login successful")
-                    .build();
+            return responseHelper.getLoginResponse(userDetails.getUsername(),token,"Login successful");
         } catch (Exception e){
             throw new RuntimeException("Invalid username or password", e);
         }
