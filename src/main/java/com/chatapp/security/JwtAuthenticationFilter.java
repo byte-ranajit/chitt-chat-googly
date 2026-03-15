@@ -5,6 +5,8 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -12,6 +14,8 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 
 @AllArgsConstructor
+@NoArgsConstructor(force = true)
+@Data
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     private final JwtUtil jwtUtil;
@@ -24,7 +28,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             if (token != null && jwtUtil.validateToken(token)){
                 String usename = jwtUtil.getUsernameFromToken(token);
                 UserDetails userDetails = userDetailsService.loadUserByUsername(usename);
-
             }
         }
     }
