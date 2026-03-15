@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @AllArgsConstructor
-public class RedisTemplateConfig {
+public class RedisPublisher {
 
     private final RedisTemplate<String, String> redisTemplate;
 

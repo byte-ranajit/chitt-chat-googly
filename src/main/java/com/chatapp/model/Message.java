@@ -13,11 +13,12 @@ import java.time.LocalDateTime;
 public class Message {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue()
     private Long id;
     private String sender;
     private String receiver;
     private String content;
     private String status;
     private LocalDateTime timeStamp;
+
 }
