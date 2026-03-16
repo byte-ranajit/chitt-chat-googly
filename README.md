@@ -429,7 +429,3 @@ Received message from Redis: hello redis
 * Push notifications
 
 ---
-
-# License
-
-MIT License
