@@ -3,21 +3,22 @@ package com.chatapp.security;
 import com.chatapp.helper.JwtKeyHelper;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
 @Component
+@AllArgsConstructor
 public class JwtUtil {
 
-    private JwtKeyHelper helper;
+    private final JwtKeyHelper helper;
 
     public String generateToken(String username){
-        long jwtExpiration = 86400000L;
         return Jwts.builder()
                 .setSubject(username)
                 .setIssuedAt(new Date())
-                .setExpiration(new Date(System.currentTimeMillis() + jwtExpiration))
+                .setExpiration(new Date(System.currentTimeMillis() + helper.getJWT_EXPIRATION()))
                 .signWith(SignatureAlgorithm.HS256, helper.getSigningKey())
                 .compact();
     }

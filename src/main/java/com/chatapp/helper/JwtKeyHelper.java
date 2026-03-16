@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import javax.crypto.SecretKey;
 
 @Component
-@AllArgsConstructor
 @Data
 public class JwtKeyHelper {
 
@@ -18,6 +17,14 @@ public class JwtKeyHelper {
 
     @Value("${jwt.expiration}")
     private final long JWT_EXPIRATION ;
+
+    public JwtKeyHelper(
+            @Value("${jwt.secret}") String secretKey,
+            @Value("${jwt.expiration}") long jwtExpiration) {
+
+        this.SECRET_KEY = secretKey;
+        this.JWT_EXPIRATION = jwtExpiration;
+    }
 
     public SecretKey getSigningKey(){
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
