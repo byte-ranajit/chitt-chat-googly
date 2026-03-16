@@ -22,12 +22,12 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthService {
 
-    private AuthenticationManager authenticationManager;
+    private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final PasswordEncoder passwordEncoder;
     private final UserDetailsService userDetailsService;
     private final UserRepository userRepository;
-    private LoginResponseHelper responseHelper;
+    private final LoginResponseHelper responseHelper;
 
     public LoginResponse register(LoginRequest request){
 
