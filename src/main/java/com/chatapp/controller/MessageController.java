@@ -13,7 +13,7 @@ import java.util.List;
 public class MessageController {
     private final MessageService messageService;
 
-    @PostMapping
+    @PostMapping("/send")
     public Message sendMessage(@RequestBody Message message){
         return messageService.save(message);
     }
@@ -26,5 +26,10 @@ public class MessageController {
     @PostMapping("/{id}/read")
     public void markAsRead(@PathVariable Long id) {
         messageService.markAsRead(id);
+    }
+
+    @GetMapping("/inbox/{user}")
+    public List<Message> inbox(@PathVariable String user){
+        return messageService.getInbox(user);
     }
 }
