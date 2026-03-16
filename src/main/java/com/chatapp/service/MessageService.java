@@ -34,4 +34,8 @@ public class MessageService {
     public List<Message> getAll(){
         return repository.findAll();
     }
+
+    public List<Message> getInbox(String user) {
+        return repository.findByReceiver(user);
+    }
 }
