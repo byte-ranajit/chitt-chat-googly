@@ -32,14 +32,15 @@ public class SecurityConfig {
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-                .authorizeHttpRequests( auths -> auths
-                                .requestMatchers("/api/auth/**").permitAll()
-//                                .requestMatchers("/auth/login").permitAll()
-//                                .requestMatchers("/auth/register").permitAll()
-                                .requestMatchers("/auth/**").permitAll()
-                                .anyRequest().authenticated()
-                ).addFilterBefore(new JwtAuthenticationFilter(jwtUtil, userDetailsService), UsernamePasswordAuthenticationFilter.class);
-
+//                .authorizeHttpRequests( auths -> auths
+//                                .requestMatchers("/api/auth/**").permitAll()
+////                                .requestMatchers("/auth/login").permitAll()
+////                                .requestMatchers("/auth/register").permitAll()
+//                                .requestMatchers("/auth/**").permitAll()
+//                                .anyRequest().authenticated()
+//                ).addFilterBefore(new JwtAuthenticationFilter(jwtUtil, userDetailsService), UsernamePasswordAuthenticationFilter.class);
+                .authorizeHttpRequests( auth -> auth
+                        .anyRequest().permitAll());
         return http.build();
     }
 

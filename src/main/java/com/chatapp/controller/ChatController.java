@@ -1,6 +1,7 @@
 package com.chatapp.controller;
 
 import com.chatapp.dto.ChatMessage;
+import com.chatapp.dto.TypingEvent;
 import com.chatapp.model.Message;
 import com.chatapp.service.MessageService;
 import lombok.AllArgsConstructor;
@@ -8,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -26,6 +28,12 @@ public class ChatController {
         message.setStatus("SENT");
         messageService.save(message);
         return message;
+    }
+
+    @MessageMapping("/chat.typing")
+    @SendTo("/topic/typing")
+    public TypingEvent typing(TypingEvent event){
+        return event;
     }
 
 }
