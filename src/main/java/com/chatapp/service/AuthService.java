@@ -31,12 +31,12 @@ public class AuthService {
 
     public LoginResponse register(LoginRequest request){
 
-        if (userRepository.existsByUserName(request.getUsername())){
+        if (userRepository.existsByUserName(request.getUserName())){
             throw new RuntimeException("Username already exists");
         }
 
         User user = User.builder()
-                .userName(request.getUsername())
+                .userName(request.getUserName())
                 .password(passwordEncoder.encode(request.getPassword()))
                 .build();
         userRepository.save(user);
@@ -47,7 +47,7 @@ public class AuthService {
     public LoginResponse login(LoginRequest request){
         try {
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(request.getUsername(), request.getPassword())
+                    new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword())
             );
 
             UserDetails userDetails = (UserDetails) authentication.getPrincipal();
