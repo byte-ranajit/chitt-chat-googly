@@ -1,5 +1,6 @@
 package com.chatapp.service;
 
+import com.chatapp.iservices.IMessageService;
 import com.chatapp.model.Message;
 import com.chatapp.redis.RedisPublisher;
 import com.chatapp.repository.MessageRepository;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @AllArgsConstructor
-public class MessageService {
+public class MessageService implements IMessageService {
 
     private final MessageRepository repository;
     private final RedisPublisher redisPublisher;
