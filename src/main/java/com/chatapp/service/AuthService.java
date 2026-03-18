@@ -3,6 +3,7 @@ package com.chatapp.service;
 import com.chatapp.dto.LoginRequest;
 import com.chatapp.dto.LoginResponse;
 import com.chatapp.helper.LoginResponseHelper;
+import com.chatapp.iservices.IAuthService;
 import com.chatapp.model.User;
 import com.chatapp.repository.UserRepository;
 import com.chatapp.security.JwtUtil;
@@ -20,7 +21,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class AuthService {
+public class AuthService implements IAuthService {
 
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
